@@ -15,25 +15,33 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
-import { FormFieldType } from "./PatientForm";
 import React from "react";
 import Image from "next/image";
 import { E164Number } from 'libphonenumber-js/core';
 
 interface CustomProps {
-    control: Control<any>,
-    fieldType: FormFieldType,
-    name:string,
-    label?: string,
-    placeholder?: string,
-    iconSrc?: string,
-    iconAlt?: string,
-    disabled?: boolean,
-    dateFormat?:string,
-    showTimeSelect?: boolean,
-    children?: React.ReactNode,
-    renderSkeleton?: (field: any) => React.ReactNode,
+  control: Control<any>;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  disabled?: boolean;
+  dateFormat?: string;
+  showTimeSelect?: boolean;
+  children?: React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode;
+  fieldType: FormFieldType;
 
+}
+export enum FormFieldType {
+  INPUT = "input",
+  TEXTAREA = "textarea",
+  PHONE_INPUT = "phoneInput",
+  CHECKBOX = "checkbox",
+  DATE_PICKER = "datePicker",
+  SELECT = "select",
+  SKELETON = "skeleton",
 }
 
 const RenderField = ({ field , props}: {field: any; props: CustomProps}) =>{
@@ -43,7 +51,9 @@ const RenderField = ({ field , props}: {field: any; props: CustomProps}) =>{
       return(
           <div className="flex rounded-md border border-dark-500 bg-dark-400">
           {iconSrc && (
-            <Image src={iconSrc} alt={iconAlt || "icon"}
+            <Image 
+            src={iconSrc || ''} 
+            alt={iconAlt || "icon"}
             height={24}
             width={24}
             className="ml-2"
@@ -59,7 +69,6 @@ const RenderField = ({ field , props}: {field: any; props: CustomProps}) =>{
           </FormControl>
           </div>
       )
-      break;
     case FormFieldType.PHONE_INPUT:
       return(
         <FormControl>
@@ -74,7 +83,6 @@ const RenderField = ({ field , props}: {field: any; props: CustomProps}) =>{
             />
         </FormControl>
       )
-      break
     default:
       break;
   }

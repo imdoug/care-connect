@@ -2,7 +2,7 @@ import * as sdk from "node-appwrite";
 
 export const {
   NEXT_PUBLIC_ENDPOINT: ENDPOINT,
-  PROJECT_ID,
+  NEXT_PUBLIC_PROJECT_ID,
   API_KEY,
   DATABASE_ID,
   PATIENT_COLLECTION_ID,
@@ -13,7 +13,7 @@ export const {
 
 const client = new sdk.Client();
 
-client.setEndpoint(ENDPOINT!).setProject(PROJECT_ID!).setKey(API_KEY!);
+client.setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT!).setProject(process.env.NEXT_PUBLIC_PROJECT_ID!).setKey(process.env.NEXT_PUBLIC_API_KEY!);
 
 export const databases = new sdk.Databases(client);
 export const users = new sdk.Users(client);
