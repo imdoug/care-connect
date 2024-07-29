@@ -27,21 +27,20 @@ export const PatientForm = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
+  const onSubmit = async ({name, email, phone}: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
 
     try {
-      const user = {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
+      const userData = {
+        name,
+        email,
+        phone
       };
 
-      const newUser = await createUser(user);
-        if (newUser) {
-          window.location.href = `/patients/${newUser.$id}/register`
-          //router.push(`/patients/${newUser.$id}/register`);
-        }
+      const user = await createUser(userData);
+      
+      if (user) router.push(`/patients/${user.$id}/register`);
+        
     } catch (error) {
       console.log(error);
     }
