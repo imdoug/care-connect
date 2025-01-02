@@ -70,9 +70,9 @@ export const AppointmentForm = ({
       default:
         status = "pending";
     }
+
     try {
       if (type === "create" && patientId) {
-        console.log('IM HERE')
         const appointment = {
           userId,
           patient: patientId,
@@ -84,7 +84,6 @@ export const AppointmentForm = ({
         };
 
         const newAppointment = await createAppointment(appointment);
-        console.log(newAppointment)
 
         if (newAppointment) {
           form.reset();
