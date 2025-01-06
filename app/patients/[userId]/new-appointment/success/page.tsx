@@ -7,7 +7,6 @@ import { formatDateTime } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 const Success =  async ({ params: {userId}, searchParams}: SearchParamProps) => {
-    
     const appointmentId = (searchParams?.appointmentId as string) || ''
     const appointment = await getAppointment(appointmentId)
     const doctor = Doctors.find((doc) => doc.name === appointment.primaryPhysician)
